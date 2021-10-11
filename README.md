@@ -1,2 +1,2 @@
 # IntroGameProject
-Game Repository for Introduction to Game Programming Course
+Game Repository for Introduction to Game Programming Course Project
