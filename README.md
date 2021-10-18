@@ -1,10 +1,16 @@
 # Game Project
 Game Repository for Introduction to Game Programming Course Project
 
-Implemented using Godot Engine v3.3.4 (MONO version 64-bit)
+_____
+
+Implemented using Godot Engine v3.3.4 (MONO version 64-bit).
+
 Godot Engine Website:  https://godotengine.org/
+
 Engine Download:  https://downloads.tuxfamily.org/godotengine/3.3.4/mono/Godot_v3.3.4-stable_mono_win64.zip
 
+_____
 
 The Godot Engine itself is free and open source software released under the MIT license.
+
 License Information:  https://github.com/godotengine/godot/blob/master/LICENSE.txt
