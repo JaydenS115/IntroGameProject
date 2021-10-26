@@ -3,7 +3,7 @@ Game Repository for Introduction to Game Programming Course Project
 
 _____
 
-Implemented using Godot Engine v3.3.4 (MONO version 64-bit).
+Implemented using Godot Engine v3.3.4 (Mono Version 64-bit).
 
 Godot Engine Website:  https://godotengine.org/
 

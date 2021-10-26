@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+centered_textures = true
+format = 1
