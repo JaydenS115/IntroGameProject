@@ -21,20 +21,19 @@ public class TilePos : Node
 	TilePos() {
 		X = 0;
 		Y = 0;
-		Z = 0;
 	}
 
 	// Constructor - Given start location
 	TilePos(int x, int y, int z) {
 		X = x;
 		Y = y;
-		Z = z;
 	}
 
 	// return Vector2 of global position in scene
-	Vector2 GetGlobal()
+	public Vector2 GetGlobal()
 	{
 		// TODO: when dimension system is decided upon
+		return Vector2.Zero;
 	}
 
 }
