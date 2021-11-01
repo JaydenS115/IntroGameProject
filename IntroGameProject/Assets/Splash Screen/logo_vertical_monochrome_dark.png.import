@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Hexagon.svg-3562394868762045de45b0be23a1fd6d.stex"
+path="res://.import/logo_vertical_monochrome_dark.png-4696ebbd7ab432707f56025455b27be1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hexagon.svg"
-dest_files=[ "res://.import/Hexagon.svg-3562394868762045de45b0be23a1fd6d.stex" ]
+source_file="res://Assets/Splash Screen/logo_vertical_monochrome_dark.png"
+dest_files=[ "res://.import/logo_vertical_monochrome_dark.png-4696ebbd7ab432707f56025455b27be1.stex" ]
 
 [params]
 
