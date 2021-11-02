@@ -7,14 +7,8 @@ public class Entity : KinematicBody2D
 	[Export]
 	public Vector2 TilePos;
 
-	/* Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		
-	}
-	*/
 
-	// return local pixel position relative to tilemap
+	/* return local pixel position relative to tilemap
 	public Vector2 GetLocalPos() {
 
 		TileMap tileMap = GetNode<TileMap>("../../TileMaps/Gridlines");
@@ -23,8 +17,9 @@ public class Entity : KinematicBody2D
 		localPos.y += tileMap.CellSize.y/2;
 		return localPos;
 	}
+	*/
 
-	// return global pixel position
+	// return global pixel position in scene
 	public Vector2 GetGlobalPos() {
 
 		TileMap tileMap = GetNode<TileMap>("../../TileMaps/Gridlines");
@@ -35,38 +30,45 @@ public class Entity : KinematicBody2D
 	}
 
 
+	// Change TilePos depending on move direction and current position
 	public void MoveInDirection(HexDirection direction) {
 		
+		Vector2 desiredPos = TilePos;
+
 		switch (direction) {
 			
 			case HexDirection.UpLeft:
-				if(TilePos.x % 2 == 0) --TilePos.y;
-				--TilePos.x;
+				if(TilePos.x % 2 == 0) --desiredPos.y;
+				--desiredPos.x;
 				break;
 
 			case HexDirection.Up:
-				--TilePos.y;
+				--desiredPos.y;
 				break;
 
 			case HexDirection.UpRight:
-				if(TilePos.x % 2 == 0) --TilePos.y;
-				++TilePos.x;
+				if(TilePos.x % 2 == 0) --desiredPos.y;
+				++desiredPos.x;
 				break;
 
 			case HexDirection.DownLeft:
-				if(TilePos.x % 2 == 1) ++TilePos.y;
-				--TilePos.x;
+				if(TilePos.x % 2 == 1) ++desiredPos.y;
+				--desiredPos.x;
 				break;
 
 			case HexDirection.Down:
-				++TilePos.y;
+				++desiredPos.y;
 				break;
 
 			case HexDirection.DownRight:
-				if(TilePos.x % 2 == 1) ++TilePos.y;
-				++TilePos.x;
+				if(TilePos.x % 2 == 1) ++desiredPos.y;
+				++desiredPos.x;
+				break;
+
+			default:
 				break;
 		}
+
 
 		GlobalPosition = GetGlobalPos();
 	}

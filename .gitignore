@@ -9,6 +9,6 @@ export_presets.cfg
 data_*/
 
 # VSCode-specific ignores
-.vscode/
-*.sln
-*.csproj
+**/.vscode/*
+**/*.sln
+**/*.csproj
