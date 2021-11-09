@@ -1,8 +1,5 @@
-using Godot;
-using System;
 
-
-// Directions within Hex Grid
+// Directions within Hexagonal Grid, relative to current grid position
 public enum HexDirection
 {
 	UpLeft, 	Up, 	UpRight,

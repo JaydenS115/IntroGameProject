@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HexGridBorder-129x129.png-0420142d6ee83f98bcc61a7f58ef69f4.stex"
+path="res://.import/TileSet-HexBorders.png-a494cbb6c3562029aa36215244be998c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/HexGridBorder-129x129.png"
-dest_files=[ "res://.import/HexGridBorder-129x129.png-0420142d6ee83f98bcc61a7f58ef69f4.stex" ]
+source_file="res://Assets/Tiles/Gridlines/TileSet-HexBorders.png"
+dest_files=[ "res://.import/TileSet-HexBorders.png-a494cbb6c3562029aa36215244be998c.stex" ]
 
 [params]
 

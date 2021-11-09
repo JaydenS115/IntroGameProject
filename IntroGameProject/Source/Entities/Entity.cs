@@ -1,77 +1,125 @@
 using Godot;
 using System;
 
-
-public class Entity : KinematicBody2D
+// Base class for all Entities
+public class Entity : Area2D
 {
-	[Export]
+	[Export]  // start position of the entity on the Hex Tile Grid
+	public Vector2 StartingTilePosition;
+
+	// the position of the entity in the TileMap
 	public Vector2 TilePos;
+	public Vector2 TargetTilePos;
+	
+
+	// tileMap and RayCast2D nodes, for movement and location
+	private static TileMap tileMap;
+	private RayCast2D collisionRay;
+
+	// The Entity's currently-conducting action
+	protected ActionHandler actionHandler;
 
 
-	/* return local pixel position relative to tilemap
-	public Vector2 GetLocalPos() {
+	// initialize members
+	public override void _Ready() 
+	{
+		tileMap = GetNode<TileMap>("../../Tiles/Gridlines");
+		collisionRay = GetNode<RayCast2D>("RayCast2D");
+		actionHandler = GetNode<ActionHandler>("ActionHandler");
 
-		TileMap tileMap = GetNode<TileMap>("../../TileMaps/Gridlines");
-		Vector2 localPos = tileMap.MapToWorld(TilePos);
-		localPos.x += tileMap.CellSize.x/2;
-		localPos.y += tileMap.CellSize.y/2;
-		return localPos;
+		// set start location in grid
+		TilePos = StartingTilePosition.Round();
+		GlobalPosition = GetGlobalPos(); 
 	}
-	*/
+
 
 	// return global pixel position in scene
-	public Vector2 GetGlobalPos() {
-
-		TileMap tileMap = GetNode<TileMap>("../../TileMaps/Gridlines");
+	public Vector2 GetGlobalPos() 
+	{
 		Vector2 localPos = tileMap.MapToWorld(TilePos);
-		localPos.x += tileMap.CellSize.x/2;
-		localPos.y += tileMap.CellSize.y/2;
+		localPos.x += (tileMap.CellSize.x/2);
+		localPos.y += (tileMap.CellSize.y/2);
+		return tileMap.ToGlobal(localPos);
+	}
+	
+	// return global pixel position of a given Tile's coordinates
+	public static Vector2 GlobalPosOfTile(Vector2 tilePosition) 
+	{
+		Vector2 localPos = tileMap.MapToWorld(tilePosition);
+		localPos.x += (tileMap.CellSize.x/2);
+		localPos.y += (tileMap.CellSize.y/2);
 		return tileMap.ToGlobal(localPos);
 	}
 
+	// check if a direction is currently able to be moved in from 
+	// the current position of the Entity
+	public bool isDirectionMovable(HexDirection direction) 
+	{
+		if(direction == HexDirection.None) return false;
 
-	// Change TilePos depending on move direction and current position
-	public void MoveInDirection(HexDirection direction) {
+		// get global position of desired target tile to move to
+		Vector2 targetPosition = GlobalPosOfTile(TilePositionOf(direction));
 		
-		Vector2 desiredPos = TilePos;
+		// cast collisionRay and check for collision (with walls or any areas)
+		return !(isCollision(targetPosition));
+		// no collision means direction is movable
+	}
+
+
+	// return true if there is/are any collision(s) between the 
+	// Entity and the given global position, otherwise false
+	private bool isCollision(Vector2 globalPos) 
+	{
+		// cast ray from entity to position
+		collisionRay.CastTo = globalPos - GlobalPosition;
+		
+		collisionRay.ForceRaycastUpdate();
+
+		// if collision - return true;
+		return collisionRay.IsColliding();
+	}
+
+	// return the tile position of a hex in the given direction,
+	// relative to the current TilePos of the Entity
+	public Vector2 TilePositionOf(HexDirection direction) {
+		
+		Vector2 targetTile = TilePos;
 
 		switch (direction) {
 			
 			case HexDirection.UpLeft:
-				if(TilePos.x % 2 == 0) --desiredPos.y;
-				--desiredPos.x;
+				if(TilePos.x % 2 == 0) --targetTile.y;
+				--targetTile.x;
 				break;
 
 			case HexDirection.Up:
-				--desiredPos.y;
+				--targetTile.y;
 				break;
 
 			case HexDirection.UpRight:
-				if(TilePos.x % 2 == 0) --desiredPos.y;
-				++desiredPos.x;
+				if(TilePos.x % 2 == 0) --targetTile.y;
+				++targetTile.x;
 				break;
 
 			case HexDirection.DownLeft:
-				if(TilePos.x % 2 == 1) ++desiredPos.y;
-				--desiredPos.x;
+				if(TilePos.x % 2 == 1) ++targetTile.y;
+				--targetTile.x;
 				break;
 
 			case HexDirection.Down:
-				++desiredPos.y;
+				++targetTile.y;
 				break;
 
 			case HexDirection.DownRight:
-				if(TilePos.x % 2 == 1) ++desiredPos.y;
-				++desiredPos.x;
+				if(TilePos.x % 2 == 1) ++targetTile.y;
+				++targetTile.x;
 				break;
 
-			default:
-				break;
+			default:	// HexDirection.None
+				break; 	// just returns current TilePos
 		}
 
-
-		GlobalPosition = GetGlobalPos();
+		return targetTile;
 	}
-
 
 }
