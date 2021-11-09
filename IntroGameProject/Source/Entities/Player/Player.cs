@@ -1,13 +1,11 @@
 using Godot;
 using System;
 
+// Player Entity
 public class Player : Entity
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    	private HexDirection handle_MoveInput()
+	// Input Handler - Move commands
+    private HexDirection handleInput_Move()
 	{
 		if(Input.IsActionJustPressed("move_upleft")) {
 			return HexDirection.UpLeft;
@@ -31,14 +29,25 @@ public class Player : Entity
 		return HexDirection.None;
 	}
 
+
+	// temporary variable to store handling
+	private HexDirection moveDirection;
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
 	{
-        // handle movement based upon input
-	    MoveInDirection(handle_MoveInput());
 
-        // look at cursor
-        LookAt(GetViewport().GetMousePosition());
+        // handle movement based upon input
+		moveDirection = handleInput_Move();
+	    
+		if(isDirectionMovable(moveDirection)) {
+
+			// TEMPORARY MOVEMENT
+			GlobalPosition = GlobalPosOfTile(TilePos = TilePositionOf(moveDirection));
+
+		}
+		
+
 	}
 
 
