@@ -5,7 +5,8 @@
 [node name="Gridlines" type="TileMap" groups=[
 "TileMaps",
 ]]
-z_index = 3
+light_mask = 0
+z_index = 5
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 96, 110 )
 cell_quadrant_size = 8
@@ -15,6 +16,7 @@ show_collision = true
 centered_textures = true
 collision_friction = 0.0
 collision_mask = 0
+occluder_light_mask = 0
 format = 1
 __meta__ = {
 "_editor_description_": "TileMap of Hexagonal Grid Borders. Edges have collision shapes, blocking movement."

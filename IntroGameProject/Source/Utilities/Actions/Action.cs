@@ -24,10 +24,12 @@ public abstract class Action : Node
 
     // Process the Action by given tick time in action handler
     // returns true if action self-completed this TickTime interval
-    public abstract bool Tick(float tickTime);
+    public abstract bool TickProcess(float tickTime);
 
+    // Invoked when action started
     public abstract void Start();
 
+    // Invoked when action finished
     public abstract void Stop();
 
 }

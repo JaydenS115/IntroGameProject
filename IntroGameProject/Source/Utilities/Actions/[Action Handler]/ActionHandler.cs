@@ -3,21 +3,19 @@ using System;
 
 public class ActionHandler : Node
 {
+    
     // The currently-active Action
     public Action CurrentAction;
+
 
     // list of available actions
     public Godot.Collections.Array<Action> ActionsAvailable; 
 
 
-    // The Entity of this Action Handler
-    private Entity entity; 
-
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        entity = GetParent<Entity>();
+        //entity = GetParent<Entity>();
         ActionsAvailable = new Godot.Collections.Array<Action>( GetChildren() );
 
         CurrentAction = null;
@@ -35,7 +33,7 @@ public class ActionHandler : Node
         if( hasActiveAction() ) {
 
             // Tick CurrentAction, and if completed, stop the Action
-            if( CurrentAction.Tick(Environment.GetTickTime()) ) {
+            if( CurrentAction.TickProcess(Tick.TickTime) ) {
 
                 CurrentAction.Stop(); // Stop and Set to null
                 CurrentAction = null;
@@ -46,17 +44,28 @@ public class ActionHandler : Node
 
 
     // Set action to new type (if possible)
-    public void SetAction(string actionName) 
+    // returns true if current action changed or set
+    public bool SetAction(string actionName) 
     {
-        SetAction(GetActionWithName(actionName));
+        Action action = GetActionWithName(actionName);
+
+        if(action != null)
+            return SetAction( action );
+        else
+            return ClearAction();
     }
 
-    public void SetAction(Action newAction) 
+
+    // Set the current action to the given action
+    // returns true if action was changed
+    public bool SetAction(Action newAction) 
     {
         // no active Action
         if( !hasActiveAction() ) {
             CurrentAction = newAction; // Set and start new Action
             CurrentAction.Start();
+
+            return true;
         }
         
         // Active, but interruptable Action
@@ -65,17 +74,34 @@ public class ActionHandler : Node
 
             CurrentAction = newAction; // Set and start new Action
             CurrentAction.Start();
+
+            return true;
         }
+        
+        // return false if action unchanged
+        return false;
     }
 
 
     // Clear the current Action, if possible
-    public void ClearAction() 
+    // return true if action is available or was stopped
+    public bool ClearAction() 
     {
-        if( hasActiveAction() && CurrentAction.IsInterruptable ) {
-            CurrentAction.Stop();
-            CurrentAction = null;
+        if( hasActiveAction() ) 
+        {
+            if( CurrentAction.IsInterruptable ) 
+            {
+                CurrentAction.Stop();
+                CurrentAction = null;
+
+                return true; // action successfully stopped
+            }
+
+            else {return false;} // action unable to be stopped
+
         }
+
+        else { return true; } // no action to stop
     }
 
     // from the available actions, return the action with the given name
