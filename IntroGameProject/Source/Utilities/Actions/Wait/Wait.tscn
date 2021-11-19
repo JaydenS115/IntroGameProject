@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Source/Utilities/Actions/Wait/Wait.cs" type="Script" id=1]
+
+[node name="Wait" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Wait Action
+Passes time for the associated Entity until interrupted"
+}
+IsInterruptable = true

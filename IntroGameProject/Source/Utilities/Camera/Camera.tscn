@@ -2,7 +2,10 @@
 
 [ext_resource path="res://Source/Utilities/Camera/Camera.cs" type="Script" id=1]
 
-[node name="Camera" type="Camera2D"]
+[node name="Camera" type="Camera2D" groups=[
+"Camera",
+]]
+light_mask = 0
 current = true
 limit_smoothed = true
 smoothing_enabled = true
@@ -12,3 +15,7 @@ drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 editor_draw_limits = true
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Camera
+The view into the current scene."
+}

@@ -37,12 +37,8 @@ public class Camera : Camera2D
     // instantly move to a global position without smoothing
     public void SnapTo(Vector2 globalPosition) 
     {
-        bool wasSmoothing = SmoothingEnabled;
-        
-        SmoothingEnabled = false;
         GlobalPosition = globalPosition;
-
-        SmoothingEnabled = wasSmoothing;
+        Align();
     }
 
 

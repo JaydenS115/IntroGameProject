@@ -1,28 +1,44 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Source/Entities/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Player/ThePlayer.png" type="Texture" id=2]
 [ext_resource path="res://Source/Utilities/Actions/[Action Handler]/ActionHandler.tscn" type="PackedScene" id=3]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 50.0
+[ext_resource path="res://Source/Entities/[Entity]/EntityCollisionShape.tres" type="Shape2D" id=4]
+[ext_resource path="res://Source/Utilities/Actions/Move/Move.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Source/Utilities/TileCollision/TileCollision.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Source/Utilities/Actions/Wait/Wait.tscn" type="PackedScene" id=7]
 
 [node name="Player" type="Area2D" groups=[
 "Entity",
 ]]
+process_priority = -1
+gravity_vec = Vector2( 0, 0 )
+gravity = 0.0
+linear_damp = 0.0
+angular_damp = 0.0
+collision_layer = 3
 collision_mask = 0
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Player
+The Player-controlled Entity"
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = ExtResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 cast_to = Vector2( 0, 0 )
 collide_with_areas = true
+
+[node name="TileCollision" parent="." instance=ExtResource( 6 )]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
 [node name="ActionHandler" parent="." instance=ExtResource( 3 )]
 
-[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
+[node name="Move" parent="ActionHandler" instance=ExtResource( 5 )]
+MoveTime = 1.25
+
+[node name="Wait" parent="ActionHandler" instance=ExtResource( 7 )]
