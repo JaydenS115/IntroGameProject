@@ -38,7 +38,7 @@ public class TilePosition
 		switch (direction) {
 			
 			case HexDirection.UpLeft:
-				if(x % 2 == 0) --targetTilePos.y;
+				if(Mathf.Abs(x) % 2 == 0) --targetTilePos.y;
 				--targetTilePos.x;
 				break;
 
@@ -47,12 +47,12 @@ public class TilePosition
 				break;
 
 			case HexDirection.UpRight:
-				if(x % 2 == 0) --targetTilePos.y;
+				if(Mathf.Abs(x) % 2 == 0) --targetTilePos.y;
 				++targetTilePos.x;
 				break;
 
 			case HexDirection.DownLeft:
-				if(x % 2 == 1) ++targetTilePos.y;
+				if(Mathf.Abs(x) % 2 == 1) ++targetTilePos.y;
 				--targetTilePos.x;
 				break;
 
@@ -61,7 +61,7 @@ public class TilePosition
 				break;
 
 			case HexDirection.DownRight:
-				if(x % 2 == 1) ++targetTilePos.y;
+				if(Mathf.Abs(x) % 2 == 1) ++targetTilePos.y;
 				++targetTilePos.x;
 				break;
 
