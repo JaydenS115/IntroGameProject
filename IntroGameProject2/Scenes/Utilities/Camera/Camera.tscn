@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Source/Utilities/Camera/Camera.cs" type="Script" id=1]
+
+[node name="Camera" type="Camera2D"]
+pause_mode = 2
+process_priority = 1
+current = true
+smoothing_enabled = true
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "The main camera into the scene"
+}
+maxZoomFactor = Vector2( 2, 2 )
+zoomStepFactor = 0.1

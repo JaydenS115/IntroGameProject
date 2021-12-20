@@ -1,0 +1,83 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Source/Utilities/HUD/HUD.cs" type="Script" id=1]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "HUD
+Heads-up Display for the game. Follows Viewport and displays information"
+}
+
+[node name="TimeEffect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = -1.0
+anchor_top = -1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 2560, 1440 )
+mouse_filter = 2
+color = Color( 0.5, 0.5, 0.75, 0.25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeText" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -35.0
+margin_right = 35.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = false
+mouse_filter = 2
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_as_outline = 1
+visible_characters = 10
+meta_underlined = false
+text = "TIME: X.XX"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 200, 200 )
+mouse_filter = 2
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prompt_WeaponSwap" type="RichTextLabel" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -60.0
+margin_top = -60.0
+margin_right = -40.0
+margin_bottom = -40.0
+rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 0
+text = "Q"
+__meta__ = {
+"_edit_use_anchors_": false
+}

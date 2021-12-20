@@ -9,7 +9,7 @@ public class Entity : Area2D
 
 	// the position of the entity in the TileMap
 	public TilePosition TilePos {get; private set;}
-	public TilePosition TargetTilePos;
+	public TilePosition TargetTilePos {get; protected set;}
 	
 
 	// tileMap and RayCast2D nodes, for movement and location
